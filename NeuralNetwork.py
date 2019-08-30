@@ -4,11 +4,13 @@ class NeuralNetwork:
 
     def __init__(self, layer_sizes):
         weight_shapes = [(a,b) for a,b in zip(layer_sizes[1:], layer_sizes[:-1])]
-        self.weights = [np.random.standard_normal(shape) for shape in weight_shapes]
+        self.weights = [np.random.standard_normal(shape)/shape[1]**0.5 for shape in weight_shapes]
         self.biases = [np.zeros((size,1)) for size in layer_sizes[1:]]
 
     def predict(self, a):
         for w, b in zip(self.weights, self.biases):
+            z = np.matmul(w,a) + b
+            print(z[0])
             a = self.activation(np.matmul(w,a) + b)
         return a
 
