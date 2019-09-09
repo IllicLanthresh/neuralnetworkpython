@@ -1,7 +1,7 @@
 import NeuralNetwork as nn
 import numpy as np
 
-layer_sizes = (1000,500,10)
+layer_sizes = (1000,500,2)
 x = np.ones((layer_sizes[0],1))
 
 network = nn.NeuralNetwork(layer_sizes)
