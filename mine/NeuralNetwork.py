@@ -8,11 +8,9 @@ class NeuralNetwork:
         self.weights = [np.random.standard_normal(shape)/shape[1]**0.5 for shape in weight_shapes]
         self.biases = [np.zeros((size,1)) for size in layer_sizes[1:]]
 
-    def predict(self, a):
-        for w, b in zip(self.weights, self.biases):
-            z = np.matmul(w,a) + b
-            print(z[0])
-            a = sigmoid(np.matmul(w,a) + b)
+    def feedforward(self, a):
+        for b, w in zip(self.biases, self.weights):
+            a = sigmoid(np.dot(w, a)+b)
         return a
 
     def SGD(self, training_data, epochs, mini_batch_size, eta,
