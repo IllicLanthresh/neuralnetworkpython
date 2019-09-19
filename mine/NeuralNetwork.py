@@ -52,8 +52,7 @@ class NeuralNetwork:
             activation = sigmoid(z)
             activations.append(activation)
         # backward pass
-        delta = self.cost_derivative(activations[-1], y) * \
-            sigmoid_prime(zs[-1])
+        delta = self.cost_derivative(activations[-1], y) * sigmoid_prime(zs[-1])
         nabla_b[-1] = delta
         nabla_w[-1] = np.dot(delta, activations[-2].transpose())
         # Note that the variable l in the loop below is used a little
@@ -70,6 +69,9 @@ class NeuralNetwork:
             nabla_w[-l] = np.dot(delta, activations[-l-1].transpose())
         return (nabla_b, nabla_w)
 
+    def cost_derivative(self, output_activations, y):
+        return (output_activations-y)
+    
     @staticmethod
     def sigmoid(x):
         return 1/(1+np.exp(-x))
